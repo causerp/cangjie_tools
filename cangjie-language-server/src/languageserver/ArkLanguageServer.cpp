@@ -452,7 +452,7 @@ void ArkLanguageServer::OnDocumentDidOpen(const DidOpenTextDocumentParams &param
     if (reBuild) {
         auto pkgName = CompilerCangjieProject::GetInstance()->GetFullPkgName(file);
         CompilerCangjieProject::GetInstance()->
-            UpdateFileStatusInCI(pkgName, file,CompilerInstance::SrcCodeChangeState::CHANGED);
+            UpdateFileStatusInCI(pkgName, file, CompilerInstance::SrcCodeChangeState::CHANGED);
     }
     int64_t version = DocMgr.AddDoc(file, params.textDocument.version, contents);
     Server->AddDoc(file, contents, version, ark::NeedDiagnostics::YES, reBuild);

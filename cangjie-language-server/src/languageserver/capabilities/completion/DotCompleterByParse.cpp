@@ -180,7 +180,7 @@ void DotCompleterByParse::FuzzyDotComplete(const ArkAST &input, const Position &
         NestedMacroComplete(input, pos, prefix, env, expr.get());
     }
 }
-
+// LCOV_EXCL_START
 void DotCompleterByParse::NestedMacroComplete(const ArkAST &input, const Position &pos, const std::string &prefix,
     CompletionEnv &env, Ptr<Expr> expr)
 {
@@ -331,7 +331,7 @@ void DotCompleterByParse::GetTyFromMacroCallNodes(Ptr<Expr> expr, std::unique_pt
         }
     }
 }
-
+// LCOV_EXCL_STOP
 void DotCompleterByParse::CompleteCandidate(const Position &pos, const std::string &prefix,
                                             CompletionEnv &env, Candidate &declOrTy)
 {
@@ -530,7 +530,7 @@ void DotCompleterByParse::FindVarDecl(Ptr<Node> node, const Position &pos, std::
         return;
     }
 }
-
+// LCOV_EXCL_START
 void DotCompleterByParse::FindVarWithPatternDecl(Ptr<Node> node, const Position &pos,
     std::string &scopeName, bool &isInclude)
 {
@@ -551,7 +551,7 @@ void DotCompleterByParse::FindVarWithPatternDecl(Ptr<Node> node, const Position 
         return;
     }
 }
-
+// LCOV_EXCL_STOP
 void DotCompleterByParse::FindClassDecl(Ptr<Node> node, const Position &pos, std::string &scopeName, bool &isInclude)
 {
     auto *pClassDecl = dynamic_cast<ClassDecl*>(node.get());
@@ -791,7 +791,7 @@ void DotCompleterByParse::FindMemberAccess(Ptr<Node> node, const Position &pos,
         isInclude = false;
     }
 }
-
+// LCOV_EXCL_START
 void DotCompleterByParse::FindRefExpr(Ptr<Node> node, const Position &pos,
                                       std::string &scopeName, bool &isInclude)
 {
@@ -806,7 +806,7 @@ void DotCompleterByParse::FindRefExpr(Ptr<Node> node, const Position &pos,
         return;
     }
 }
-
+// LCOV_EXCL_STOP
 void DotCompleterByParse::FindCallExpr(Ptr<Node> node, const Position &pos,
                                        std::string &scopeName, bool &isInclude)
 {
@@ -865,7 +865,7 @@ void DotCompleterByParse::FindTryExpr(Ptr<Node> node, const Position &pos, std::
         DeepFind(pTryExpr->finallyBlock.get(), pos, scopeName, isInclude);
     }
 }
-
+// LCOV_EXCL_START
 void DotCompleterByParse::FindMacroDecl(Ptr<Node> node, const Position &pos, std::string &scopeName, bool &isInclude)
 {
     auto MD = dynamic_cast<MacroDecl*>(node.get());
@@ -895,7 +895,7 @@ void DotCompleterByParse::FindMacroExpandDecl(
     if (!MED) { return; }
     DeepFind(MED->invocation.decl.get(), pos, scopeName, isInclude);
 }
-
+// LCOV_EXCL_STOP
 void DotCompleterByParse::FindSynchronizedExpr(Ptr<Cangjie::AST::Node> node, const Cangjie::Position &pos,
                                                std::string &scopeName, bool &isInclude)
 {

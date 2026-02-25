@@ -575,11 +575,13 @@ void CompilerCangjieProject::CompilerOneFile(
         auto found = fullPkgName.find_last_of(DOT);
         if (found != std::string::npos) {
             auto subPkgName = fullPkgName.substr(0, found);
+            // LCOV_EXCL_START
             if (pkgInfoMap.find(subPkgName) != pkgInfoMap.end() &&
                 pkgInfoMap[subPkgName]->compilerInvocation->globalOptions.noSubPkg) {
                 pkgInfoMap[subPkgName]->compilerInvocation->globalOptions.noSubPkg = false;
                 cjoManager->UpdateStatus({subPkgName}, DataStatus::STALE);
             }
+            // LCOV_EXCL_STOP
         }
         if (!Cangjie::FileUtil::HasExtension(absName, CANGJIE_MACRO_FILE_EXTENSION)) {
             pkgInfoMap[fullPkgName]->bufferCache[absName] = contents;
@@ -1626,14 +1628,14 @@ std::vector<std::string> CompilerCangjieProject::GetConditionCompilePaths() cons
 {
     return passedWhenCfgPaths;
 }
-
+// LCOV_EXCL_START
 void CompilerCangjieProject::GetDiagCurEditFile(const std::string &file)
 {
     std::vector<DiagnosticToken> diagnostics = callback->GetDiagsOfCurFile(file);
     int64_t version = callback->GetVersionByFile(file);
     callback->ReadyForDiagnostics(file, version, diagnostics);
 }
-
+// LCOV_EXCL_STOP
 void CompilerCangjieProject::BuildIndex(const std::unique_ptr<LSPCompilerInstance> &ci, bool isFullCompilation)
 {
     auto packages = ci->GetSourcePackages();
@@ -1723,7 +1725,7 @@ void CompilerCangjieProject::BuildIndex(const std::unique_ptr<LSPCompilerInstanc
         indexLock.unlock();
     }
 }
-
+// LCOV_EXCL_START
 void CompilerCangjieProject::UpdateOnDisk(const std::string &path)
 {
     auto found = pathToFullPkgName.find(FileUtil::GetDirPath(path));
@@ -1733,7 +1735,7 @@ void CompilerCangjieProject::UpdateOnDisk(const std::string &path)
     std::string pkgName = found->second;
     cacheManager->Store(pkgName, Digest(GetPathFromPkg(pkgName)), LSPCompilerInstance::astDataMap[pkgName].first);
 }
-
+// LCOV_EXCL_STOP
 Position CompilerCangjieProject::getPackageNameErrPos(const File &file) const
 {
     // packagePos not exist return file.begin

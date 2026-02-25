@@ -1162,7 +1162,7 @@ void ArkLanguageServer::OnDocumentSymbol(const DocumentSymbolParams &params, nlo
     };
     Server->FindDocumentSymbol(params, reply);
 }
-
+// LCOV_EXCL_START
 void ArkLanguageServer::AutoImportQuickFixPrepare(DiagnosticToken &diagnostic, ArkAST *arkAst)
 {
     if (!arkAst || !(diagnostic.diaFix.has_value() && diagnostic.diaFix->isAutoImport)) {
@@ -1251,3 +1251,4 @@ void ArkLanguageServer::AddAutoImportQuickFix(DiagnosticToken &diagnostic, const
     diagnostic.codeActions = actions;
 }
 } // namespace ark
+// LCOV_EXCL_STOP

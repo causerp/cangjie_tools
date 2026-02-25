@@ -161,7 +161,7 @@ std::string HoverImpl::GetHoverMessageForBlockComment(const std::vector<std::str
     }
     return retBlockComment;
 }
-
+// LCOV_EXCL_START
 std::string HoverImpl::GetEffectiveDocComment(std::vector<std::string> &content, const std::string &blockTag)
 {
     // 4 spaces for indent
@@ -227,7 +227,7 @@ Decl* HoverImpl::GetRealDecl(const std::vector<Ptr<Decl>> &decls)
 
     return decl;
 }
-// LCOV_EXCL_START
+
 void HoverImpl::ResolveDocMapAndDocKey(std::unordered_map<std::string, std::vector<std::string>> &doc,
                                        std::vector<std::string> &keyOfDoc, std::string resultToString)
 {

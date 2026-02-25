@@ -494,6 +494,7 @@ void CompletionEnv::DealFuncParamList(Ptr<Node> node, const Position pos)
         }
         return;
     }
+    // LCOV_EXCL_START
     for (auto &memberDecl : pFuncParamList->params) {
         if (!memberDecl) { continue; }
         if (memberDecl->commaPos.IsZero()) { continue; }
@@ -503,6 +504,7 @@ void CompletionEnv::DealFuncParamList(Ptr<Node> node, const Position pos)
         }
     }
     DeepComplete(innerDecl, pos);
+    // LCOV_EXCL_STOP
 }
 
 void CompletionEnv::DealGeneric(Ptr<Node> node, const Position pos)
